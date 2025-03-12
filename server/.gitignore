@@ -1,0 +1,13 @@
+# Go build files
+*.exe
+*.exe~
+*.dll
+*.so
+*.dylib
+
+# Testing
+*.test
+*.out
+
+# Go Modules
+/vendor/
