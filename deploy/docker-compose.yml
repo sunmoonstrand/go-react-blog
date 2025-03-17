@@ -1,0 +1,100 @@
+version: '3.8'
+
+services:
+  backend:
+    build:
+      context: ..
+      dockerfile: deploy/Dockerfile.go
+    container_name: grb_server
+    restart: always
+    volumes:
+      - ../server:/app
+    ports:
+      - "${BACKEND_PORT}:${BACKEND_PORT}"
+    depends_on:
+      - postgres
+      - redis
+    environment:
+      - POSTGRES_HOST=postgres
+      - POSTGRES_DB=${POSTGRES_DB}
+      - POSTGRES_USER=${POSTGRES_USER}
+      - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
+      - REDIS_HOST=redis
+      - REDIS_PORT=${REDIS_PORT}
+      - REDIS_PASSWORD=${REDIS_PASSWORD}
+    networks:
+      blog_net:
+        ipv4_address: ${BACKEND_IP}
+
+  admin:
+    build:
+      context: ..
+      dockerfile: deploy/Dockerfile.react
+      args:
+        APP_DIR: admin
+    container_name: grb_admin
+    restart: always
+    volumes:
+      - ../admin:/app
+    ports:
+      - "${ADMIN_PORT}:${ADMIN_PORT}"
+    networks:
+      blog_net:
+        ipv4_address: ${ADMIN_IP}
+
+  web:
+    build:
+      context: ..
+      dockerfile: deploy/Dockerfile.react
+      args:
+        APP_DIR: web
+    container_name: grb_web
+    restart: always
+    volumes:
+      - ../web:/app
+    ports:
+      - "${WEB_PORT}:${WEB_PORT}"
+    networks:
+      blog_net:
+        ipv4_address: ${WEB_IP}
+
+  postgres:
+    image: postgres:16
+    container_name: grb_postgres
+    restart: always
+    environment:
+      - POSTGRES_DB=${POSTGRES_DB}
+      - POSTGRES_USER=${POSTGRES_USER}
+      - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
+    ports:
+      - "${POSTGRES_PORT}:5432" # 自定义的是暴露出去的端口, 容器内运行固定为 5432
+    volumes:
+      - ../pgdata:/var/lib/postgresql/data
+      - ./pg.sql:/docker-entrypoint-initdb.d/pg.sql
+    networks:
+      blog_net:
+        ipv4_address: ${POSTGRES_IP}
+
+  redis:
+    image: redis:7-alpine
+    container_name: grb_redis
+    restart: always
+    ports:
+      - "${REDIS_PORT}:6379"
+    command: redis-server --requirepass ${REDIS_PASSWORD} --appendonly yes
+    volumes:
+      - ../redisdata:/data
+    networks:
+      blog_net:
+        ipv4_address: ${REDIS_IP}
+
+networks:
+  blog_net:
+    driver: bridge
+    ipam:
+      config:
+        - subnet: ${SUBNET}
+
+volumes:
+  pgdata:
+  redisdata:

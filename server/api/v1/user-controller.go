@@ -7,10 +7,10 @@ import (
 	"github.com/gin-gonic/gin"
 	"golang.org/x/crypto/bcrypt"
 
-	"d:/www/blog/server/internal/logger"
-	"d:/www/blog/server/internal/middleware"
-	"d:/www/blog/server/internal/model"
-	"d:/www/blog/server/internal/utils/resp"
+	"github.com/sunmoonstrand/go-react-blog/server/internal/logger"
+	"github.com/sunmoonstrand/go-react-blog/server/internal/middleware"
+	"github.com/sunmoonstrand/go-react-blog/server/internal/model"
+	"github.com/sunmoonstrand/go-react-blog/server/internal/utils/resp"
 )
 
 // UserController 用户控制器

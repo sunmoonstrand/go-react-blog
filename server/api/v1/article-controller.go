@@ -6,10 +6,10 @@ import (
 
 	"github.com/gin-gonic/gin"
 
-	"github.com/sunmoonstrand/blog/server/internal/logger"
-	"github.com/sunmoonstrand/blog/server/internal/middleware"
-	"github.com/sunmoonstrand/blog/server/internal/model"
-	"github.com/sunmoonstrand/blog/server/internal/utils/resp"
+	"github.com/sunmoonstrand/go-react-blog/server/internal/logger"
+	"github.com/sunmoonstrand/go-react-blog/server/internal/middleware"
+	"github.com/sunmoonstrand/go-react-blog/server/internal/model"
+	"github.com/sunmoonstrand/go-react-blog/server/internal/utils/resp"
 )
 
 // ArticleController 文章控制器

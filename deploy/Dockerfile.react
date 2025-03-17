@@ -1,0 +1,13 @@
+FROM node:20-alpine
+
+ARG APP_DIR
+WORKDIR /app
+
+# Create new React app if package.json doesn't exist
+RUN if [ ! -f package.json ]; then \
+    npx create-react-app . && \
+    npm install \
+    ; fi
+
+EXPOSE 3000
+CMD ["npm", "start"]

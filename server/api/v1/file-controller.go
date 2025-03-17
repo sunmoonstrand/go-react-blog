@@ -11,11 +11,11 @@ import (
 	"github.com/gin-gonic/gin"
 	"github.com/google/uuid"
 
-	"github.com/yourusername/blog/server/internal/logger"
-	"github.com/yourusername/blog/server/internal/middleware"
-	"github.com/yourusername/blog/server/internal/model"
-	"github.com/yourusername/blog/server/internal/service/storage"
-	"github.com/yourusername/blog/server/internal/utils/resp"
+	"github.com/sunmoonstrand/go-react-blog/server/internal/logger"
+	"github.com/sunmoonstrand/go-react-blog/server/internal/middleware"
+	"github.com/sunmoonstrand/go-react-blog/server/internal/model"
+	"github.com/sunmoonstrand/go-react-blog/server/internal/service/storage"
+	"github.com/sunmoonstrand/go-react-blog/server/internal/utils/resp"
 )
 
 // FileController 文件控制器
