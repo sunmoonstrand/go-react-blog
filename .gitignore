@@ -24,6 +24,7 @@ go.work.sum
 # env file
 .env
 
+
 # grb.sql
 BLOG_PRD.md
 pgdata/
